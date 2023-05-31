@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   ecomm:
+    image: lightbarbara/ecomm:1.0
     container_name: ecomm
     build: .
     networks:
