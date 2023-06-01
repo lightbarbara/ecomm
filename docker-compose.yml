@@ -13,8 +13,9 @@ services:
       - mongo-ecomm
 
   mongo-ecomm:
-    image: mongo:4.4.6
+    image: mongo
     container_name: mongo-ecomm
+    restart: always
     networks:
       - ecomm
     environment:
@@ -22,6 +23,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
     volumes:
       - db-mongo-ecomm:/data/db
+      - type: bind
+        source: ./mongo
+        target: /mongo-scripts
     ports:
       - 27017:27017
 
