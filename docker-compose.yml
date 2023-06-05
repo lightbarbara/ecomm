@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  ecomm:
+    image: lightbarbara/ecomm:2.0
+    container_name: ecomm
+    build: .
+    networks:
+      - ecomm
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo-ecomm
+
+  mongo-ecomm:
+    image: mongo
+    container_name: mongo-ecomm
+    restart: always
+    networks:
+      - ecomm
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - db-mongo-ecomm:/data/db
+      - type: bind
+        source: ./mongo
+        target: /mongo-scripts
+    ports:
+      - 27017:27017
+
+networks:
+  ecomm:
+    driver: bridge
+
+volumes:
+  db-mongo-ecomm:
