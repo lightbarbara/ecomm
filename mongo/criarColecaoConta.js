@@ -45,7 +45,7 @@ db.createCollection('accounts', {
                 endereco: {
                     type: 'object',
                     description: 'address details',
-                    required: ['bairro', 'rua', 'numero', 'complemento', 'cep', 'cidade', 'uf'],
+                    required: ['bairro', 'rua', 'numero', 'cep', 'cidade', 'uf'],
                     additionalProperties: false,
                     properties: {
                         bairro: {
