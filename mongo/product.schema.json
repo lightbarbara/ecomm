@@ -1,0 +1,43 @@
+{
+    "title": "products",
+    "description": "products list",
+    "type": "object",
+    "required": ["_id", "nome", "descricao", "slug", "preco", "estoque", "categoria"],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "bsonType": "objectId",
+            "description": "id must be a string"
+        },
+        "nome": {
+            "type": "string",
+            "minLength": 5,
+            "description": "name must be a string and have minimum length = 5"
+        },
+        "descricao": {
+            "type": "string",
+            "minLength": 10,
+            "description": "descricao must be a string and have minimum length = 10"
+        },
+        "slug": {
+            "type": "string",
+            "minLength": 5,
+            "description": "slug must be a string and have minimum length = 5"
+        },
+        "preco": {
+            "type": "number",
+            "minimum": 0,
+            "description": "preco must be a number and have minimum value = 0"
+        },
+        "estoque": {
+            "type": "number",
+            "minimum": 0,
+            "description": "estoque must be a number and have minimum value = 0"
+        },
+        "categoria": {
+            "type": "string",
+            "enum": ["AUTOMOTIVA", "CELULARES", "INFORMÁTICA", "LIVROS", "MÓVEIS"],
+            "description": "categoria must be AUTOMOTIVA, CELULARES, INFORMÁTICA, LIVROS or MÓVEIS"
+        }
+    }
+}
