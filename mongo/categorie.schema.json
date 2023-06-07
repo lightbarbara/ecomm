@@ -1,21 +1,21 @@
 {
     "title": "categories",
     "description": "categories list",
-    "type": "object",
+    "bsonType": "object",
     "required": ["_id", "nome", "status"],
     "additionalProperties": false,
     "properties": {
         "_id": {
             "bsonType": "objectId",
-            "description": "id must be a string"
+            "description": "id must be an objectId"
         },
         "nome": {
-            "type": "string",
+            "bsonType": "string",
             "minLength": 3,
             "description": "name must be a string and have minimum length = 3"
         },
         "status": {
-            "type": "string",
+            "bsonType": "string",
             "enum": ["ATIVA", "INATIVA"],
             "description": "status must be ATIVA or INATIVA"
         }
