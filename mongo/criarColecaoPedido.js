@@ -78,11 +78,11 @@ db.createCollection('orders', {
                 },
                 itens: {
                     bsonType: 'array',
-                    description: 'itens must contain at least one item with its id, quantity, discount and price',
+                    description: 'itens must contain at least one item with its id, quantity and price',
                     minItems: 1,
                     items: {
                         bsonType: 'object',
-                        description: 'an item must contain productId, quantity, discount and price',
+                        description: 'an item must contain productId, quantity and price',
                         required: ['productId', 'quantity', 'precoUnitario'],
                         additionalProperties: false,
                         properties: {
@@ -96,7 +96,7 @@ db.createCollection('orders', {
                                 description: 'quantity must be an int greater than or equal to 1'
                             },
                             discount: {
-                                bsonType: 'int',
+                                bsonType: 'decimal',
                                 minimum: 0,
                                 description: 'discount must be an int greater than or equal to 0'
                             },
