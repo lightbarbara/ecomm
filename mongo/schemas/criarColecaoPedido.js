@@ -98,11 +98,13 @@ db.createCollection('orders', {
                             discount: {
                                 bsonType: 'decimal',
                                 minimum: 0,
+                                exclusiveMinimum: true,
                                 description: 'discount must be an int greater than or equal to 0'
                             },
                             precoUnitario: {
                                 bsonType: 'decimal',
                                 minimum: 0,
+                                exclusiveMinimum: true,
                                 description: 'precoUnitario must be a decimal greater than or equal to 0'
                             }
                         }
