@@ -27,4 +27,13 @@ export default class CategoryService {
             handleError(err)
         }
     }
+
+    static async findCategoryById(id) {
+        try {
+            const category = await fetch(`${url}/${id}`)
+            await handleResponse(category)
+        } catch (err) {
+            handleError(err)
+        }
+    }
 }
