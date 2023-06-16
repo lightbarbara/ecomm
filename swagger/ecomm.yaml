@@ -1,0 +1,47 @@
+openapi: 3.0.1
+info:
+  title: Ecomm API
+  description: API to handle an ecommerce
+  version: 0.0.1
+  contact:
+    name: Barbara Luz
+    email: barbarartluz@gmail.com
+    url: https://linkedin.com/in/barbara-luz
+  license:
+    name: License GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: External documentation
+  url: https://github.com/lightbarbara/ecomm
+servers:
+- url: http://localhost:3000/
+  description: Dev
+paths:
+  /api/categories:
+    get:
+      summary: Retrieve all categories
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    nome:
+                      type: string
+                    status:
+                      type: string
+        204:
+          description: No categories available
+          content:
+            application/json:
+              example: []
+        404:
+          description: Not Found Error - this page doesn't exist
+          content:
+            application/json:
+              example: 'Not Found'
