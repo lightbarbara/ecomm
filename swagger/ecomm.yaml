@@ -80,6 +80,87 @@ paths:
               example: 'Unauthorized'
       security:
       - auth: []
+  /api/admin/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    put:
+      summary: Update an existing category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCategory'
+      responses:
+        200:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+    delete:
+      summary: Delete an existing category
+      responses:
+        204:
+          description: Deleted
+          content:
+            application/json:
+              example: {}
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+  /api/admin/categories/{id}/activate:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    patch:
+      summary: Activate an existing category
+      responses:
+        200:
+          description: Activated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
 components:
   schemas:
     Category:
@@ -100,6 +181,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Category'
+    UpdateCategory:
+      type: object
+      properties:
+        nome:
+          type: string
+        status:
+          type: string
   securitySchemes:
     auth:
       type: http
