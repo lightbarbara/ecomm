@@ -1,4 +1,5 @@
 import chalk from "chalk"
+import fs from 'fs'
 
 const url = 'http://localhost:3000/categories'
 
@@ -13,7 +14,7 @@ async function handleResponse(res) {
 
     console.log(`response status: ${status}`)
 
-    if (res.status === 200) {
+    if ([200, 201].includes(res.status)) {
         console.log(json)
     }
 }
@@ -32,6 +33,25 @@ export default class CategoryService {
         try {
             const category = await fetch(`${url}/${id}`)
             await handleResponse(category)
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
+    static async createCategory(category) {
+        try {
+            const catString = await fs.promises.readFile(category, 'utf-8')
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: catString
+            })
+
+            await handleResponse(res)
         } catch (err) {
             handleError(err)
         }

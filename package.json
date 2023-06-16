@@ -9,11 +9,13 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "api": "npx json-server --watch src/cli/db.json",
         "listarCategorias": "node src/cli/cli.js --listarCategorias",
-        "recuperarCategoriaPorId": "node src/cli/cli.js --recuperarCategoriaPorId"
+        "recuperarCategoriaPorId": "node src/cli/cli.js --recuperarCategoriaPorId",
+        "inserirCategoria": "node src/cli/cli.js --inserirCategoria"
     },
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "chalk": "^5.2.0"
+        "chalk": "^5.2.0",
+        "fs": "^0.0.1-security"
     }
 }

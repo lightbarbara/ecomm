@@ -5,6 +5,7 @@ const command = process.argv
 async function processarComando(args) {
     const command = args[2]
     const id = args[3]
+    const category = args[3]
 
     switch (command) {
         case '--listarCategorias':
@@ -13,6 +14,8 @@ async function processarComando(args) {
         case '--recuperarCategoriaPorId':
             await CategoryService.findCategoryById(id)
             break
+        case '--inserirCategoria':
+            await CategoryService.createCategory(category)
     }
 }
 
