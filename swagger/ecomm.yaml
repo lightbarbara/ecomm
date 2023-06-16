@@ -26,15 +26,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  properties:
-                    id:
-                      type: integer
-                    nome:
-                      type: string
-                    status:
-                      type: string
+                $ref: '#/components/schemas/Categories'
         204:
           description: No categories available
           content:
@@ -60,14 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  nome:
-                    type: string
-                  status:
-                    type: string
+                $ref: '#/components/schemas/Category'
         404:
           description: Not Found
           content:
@@ -80,26 +65,36 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                nome:
-                  type: string
+              $ref: '#/components/schemas/CreateCategory'
       responses:
         201:
           description: Created
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  nome:
-                    type: string
-                  status:
-                    type: string
+                $ref: '#/components/schemas/Category'
         401:
           description: Unauthorized
           content:
             application/json:
               example: 'Unauthorized'
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    CreateCategory:
+      type: object
+      properties:
+        nome:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
