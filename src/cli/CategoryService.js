@@ -56,4 +56,23 @@ export default class CategoryService {
             handleError(err)
         }
     }
+
+    static async updateCategory(id, category) {
+        try {
+            const catString = await fs.promises.readFile(category, 'utf-8')
+
+            const res = await fetch(`${url}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: catString
+            })
+
+            await handleResponse(res)
+        } catch (err) {
+            handleError(err)
+        }
+    }
 }
