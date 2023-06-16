@@ -78,6 +78,8 @@ paths:
           content:
             application/json:
               example: 'Unauthorized'
+      security:
+      - auth: []
 components:
   schemas:
     Category:
@@ -98,3 +100,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Category'
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
