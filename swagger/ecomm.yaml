@@ -45,3 +45,33 @@ paths:
           content:
             application/json:
               example: 'Not Found'
+  /api/admin/categories:
+    post:
+      summary: Create a new category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  nome:
+                    type: string
+                  status:
+                    type: string
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
