@@ -75,4 +75,17 @@ export default class CategoryService {
             handleError(err)
         }
     }
+
+    static async deleteCategory(id) {
+        try {
+            const res = await fetch(`${url}/${id}`, {
+                method: 'DELETE'
+            })
+
+            await handleResponse(res)
+        } catch (err) {
+            console.log(err)
+            handleError(err)
+        }
+    }
 }

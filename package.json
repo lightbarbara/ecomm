@@ -11,7 +11,8 @@
         "listarCategorias": "node src/cli/cli.js --listarCategorias",
         "recuperarCategoriaPorId": "node src/cli/cli.js --recuperarCategoriaPorId",
         "inserirCategoria": "node src/cli/cli.js --inserirCategoria",
-        "atualizarCategoria": "node src/cli/cli.js --atualizarCategoria"
+        "atualizarCategoria": "node src/cli/cli.js --atualizarCategoria",
+        "excluirCategoria": "node src/cli/cli.js --excluirCategoria"
     },
     "author": "",
     "license": "MIT",

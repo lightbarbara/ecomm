@@ -21,6 +21,9 @@ async function processarComando(args) {
         case '--atualizarCategoria':
             await CategoryService.updateCategory(id, updatedCategory)
             break
+        case '--excluirCategoria':
+            await CategoryService.deleteCategory(id)
+            break
     }
 }
 
