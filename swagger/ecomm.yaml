@@ -151,6 +151,8 @@ paths:
         type: integer
       required: true
     patch:
+      tags:
+      - Categories
       summary: Activate an existing category
       responses:
         200:
@@ -171,12 +173,133 @@ paths:
               example: 'Not Found'
       security:
       - auth: []
+  /api/admin/products:
+    post:
+      tags:
+      - Products
+      summary: Create a new product
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+      security:
+      - auth: []
+  /api/products:
+    get:
+      tags:
+      - Products
+      summary: Retrieve all products
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        204:
+          description: No products available
+          content:
+            application/json:
+              example: []
+        404:
+          description: Not Found Error - this page doesn't exist
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+      - Products
+      summary: Retrieve a product by its id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/admin/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    put:
+      tags:
+      - Products
+      summary: Update an existing product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProduct'
+      responses:
+        200:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+    delete:
+      tags:
+      - Products
+      summary: Delete an existing product
+      responses:
+        204:
+          description: Deleted
+          content:
+            application/json:
+              example: {}
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
 components:
   schemas:
     Category:
       type: object
       properties:
-        id:
+        _id:
           type: integer
         nome:
           type: string
@@ -198,6 +321,42 @@ components:
           type: string
         status:
           type: string
+    Product:
+      type: object
+      properties:
+        _id:
+          type: number
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        estoque:
+          type: number
+        categoria:
+          type: string
+    UpdateProduct:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        estoque:
+          type: number
+        categoria:
+          type: string
+    Products:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
   securitySchemes:
     auth:
       type: http
