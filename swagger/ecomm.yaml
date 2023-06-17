@@ -431,6 +431,46 @@ paths:
               example: 'Not Found'
       security:
       - auth: []
+  /api/orders:
+    post:
+      tags:
+      - Orders
+      summary: Make a new order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrder'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /api/orders/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+      - Orders
+      summary: Retrieve an order by its id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              example: 'Not Found'
 components:
   schemas:
     Category:
@@ -563,7 +603,144 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/User'
-  securitySchemes:
+    Order:
+      type: object
+      properties:
+        _id:
+          type: integer
+        dataPedido:
+          type: string
+          format: date
+        account:
+          type: object
+          properties:
+            accountId:
+              type: integer
+            usuario:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              enum:
+              - AC
+              - AL
+              - AP
+              - AM
+              - BA
+              - CE
+              - DF
+              - ES
+              - GO
+              - MA
+              - MT
+              - MS
+              - MG
+              - PA
+              - PB
+              - PR
+              - PE
+              - PI
+              - RJ
+              - RN
+              - RS
+              - RO
+              - RR
+              - SC
+              - SP
+              - SE
+              - TO
+        itens:
+          type: array
+          items:
+            properties:
+              productId:
+                type: integer
+              quantity:
+                type: number
+              discount:
+                type: number
+              precoUnitario:
+                type: number
+    CreateOrder:
+      type: object
+      properties:
+        account:
+          type: object
+          properties:
+            accountId:
+              type: integer
+            usuario:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              enum:
+              - AC
+              - AL
+              - AP
+              - AM
+              - BA
+              - CE
+              - DF
+              - ES
+              - GO
+              - MA
+              - MT
+              - MS
+              - MG
+              - PA
+              - PB
+              - PR
+              - PE
+              - PI
+              - RJ
+              - RN
+              - RS
+              - RO
+              - RR
+              - SC
+              - SP
+              - SE
+              - TO
+        itens:
+          type: array
+          items:
+            properties:
+              productId:
+                type: integer
+              quantity:
+                type: number
+              discount:
+                type: number
+              precoUnitario:
+                type: number
+securitySchemes:
     auth:
       type: http
       scheme: bearer
