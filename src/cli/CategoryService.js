@@ -84,7 +84,6 @@ export default class CategoryService {
 
             await handleResponse(res)
         } catch (err) {
-            console.log(err)
             handleError(err)
         }
     }

@@ -178,6 +178,11 @@ paths:
       tags:
       - Products
       summary: Create a new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateProduct'
       responses:
         201:
           description: Created
@@ -252,7 +257,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProduct'
+              $ref: '#/components/schemas/CreateOrUpdateProduct'
       responses:
         200:
           description: Updated
@@ -276,6 +281,138 @@ paths:
       tags:
       - Products
       summary: Delete an existing product
+      responses:
+        204:
+          description: Deleted
+          content:
+            application/json:
+              example: {}
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+  /api/admin/users:
+    post:
+      tags:
+      - Users
+      summary: Create a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateUser'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+      security:
+      - auth: []
+    get:
+      tags:
+      - Users
+      summary: Retrieve all users
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        204:
+          description: No users available
+          content:
+            application/json:
+              example: []
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found Error - this page doesn't exist
+          content:
+            application/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+  /api/users/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+      - Users
+      summary: Retrieve an user by its id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/admin/users/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    put:
+      tags:
+      - Users
+      summary: Update an existing user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateUser'
+      responses:
+        200:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+    delete:
+      tags:
+      - Users
+      summary: Delete an existing user
       responses:
         204:
           description: Deleted
@@ -338,7 +475,7 @@ components:
           type: number
         categoria:
           type: string
-    UpdateProduct:
+    CreateOrUpdateProduct:
       type: object
       properties:
         nome:
@@ -357,6 +494,75 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Product'
+    User:
+      type: object
+      properties:
+        _id:
+          type: number
+        usuario:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        dataCriacao:
+          type: string
+          format: date
+        cpf:
+          type: string
+        telefone:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+    CreateOrUpdateUser:
+      type: object
+      properties:
+        usuario:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
   securitySchemes:
     auth:
       type: http
