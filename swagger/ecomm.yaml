@@ -202,6 +202,27 @@ paths:
       tags:
       - Products
       summary: Retrieve all products
+      parameters:
+      - name: lowerPrice
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: higherPrice
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: category
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: requiredStock
+        in: query
+        schema:
+          type: integer
+        required: false
       responses:
         200:
           description: Success
@@ -740,7 +761,7 @@ components:
                 type: number
               precoUnitario:
                 type: number
-securitySchemes:
+  securitySchemes:
     auth:
       type: http
       scheme: bearer
