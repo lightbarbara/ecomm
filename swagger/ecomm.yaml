@@ -19,6 +19,8 @@ servers:
 paths:
   /api/categories:
     get:
+      tags:
+      - Categories
       summary: Retrieve all categories
       responses:
         200:
@@ -45,6 +47,8 @@ paths:
         type: integer
       required: true
     get:
+      tags:
+      - Categories
       summary: Retrieve a category by its id
       responses:
         200:
@@ -60,6 +64,8 @@ paths:
               example: 'Not Found'
   /api/admin/categories:
     post:
+      tags:
+      - Categories
       summary: Create a new category
       requestBody:
         content:
@@ -88,6 +94,8 @@ paths:
         type: integer
       required: true
     put:
+      tags:
+      - Categories
       summary: Update an existing category
       requestBody:
         content:
@@ -114,6 +122,8 @@ paths:
       security:
       - auth: []
     delete:
+      tags:
+      - Categories
       summary: Delete an existing category
       responses:
         204:
