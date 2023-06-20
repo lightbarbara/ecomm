@@ -498,7 +498,7 @@ components:
       type: object
       properties:
         _id:
-          type: integer
+          type: string
         nome:
           type: string
         status:
@@ -523,7 +523,7 @@ components:
       type: object
       properties:
         _id:
-          type: number
+          type: string
         nome:
           type: string
         descricao:
@@ -559,7 +559,7 @@ components:
       type: object
       properties:
         _id:
-          type: number
+          type: string
         usuario:
           type: string
         email:
@@ -628,7 +628,7 @@ components:
       type: object
       properties:
         _id:
-          type: integer
+          type: string
         dataPedido:
           type: string
           format: date
