@@ -1,5 +1,5 @@
-use('ecomm')
+use('ecomm');
 
-const categories = db.categories.find({status: 'ATIVA'})
+const categories = db.categories.find({ status: 'ATIVA' });
 
-console.log(categories)
+console.log(categories);

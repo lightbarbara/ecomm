@@ -1,0 +1,768 @@
+openapi: 3.0.1
+info:
+  title: Ecomm API
+  description: API to handle an ecommerce
+  version: 0.0.1
+  contact:
+    name: Barbara Luz
+    email: barbarartluz@gmail.com
+    url: https://linkedin.com/in/barbara-luz
+  license:
+    name: License GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: External documentation
+  url: https://github.com/lightbarbara/ecomm
+servers:
+- url: http://localhost:3000/
+  description: Dev
+paths:
+  /api/categories:
+    get:
+      tags:
+      - Categories
+      summary: Retrieve all categories
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categories'
+        204:
+          description: No categories available
+          content:
+            application/json:
+              example: []
+        404:
+          description: Not Found Error - this page doesn't exist
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+      - Categories
+      summary: Retrieve a category by its id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/admin/categories:
+    post:
+      tags:
+      - Categories
+      summary: Create a new category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCategory'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+      security:
+      - auth: []
+  /api/admin/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    put:
+      tags:
+      - Categories
+      summary: Update an existing category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCategory'
+      responses:
+        200:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+    delete:
+      tags:
+      - Categories
+      summary: Delete an existing category
+      responses:
+        204:
+          description: Deleted
+          content:
+            application/json:
+              example: {}
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+  /api/admin/categories/{id}/activate:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    patch:
+      tags:
+      - Categories
+      summary: Activate an existing category
+      responses:
+        200:
+          description: Activated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+  /api/admin/products:
+    post:
+      tags:
+      - Products
+      summary: Create a new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateProduct'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+      security:
+      - auth: []
+  /api/products:
+    get:
+      tags:
+      - Products
+      summary: Retrieve all products
+      parameters:
+      - name: lowerPrice
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: higherPrice
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: category
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: requiredStock
+        in: query
+        schema:
+          type: integer
+        required: false
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        204:
+          description: No products available
+          content:
+            application/json:
+              example: []
+        404:
+          description: Not Found Error - this page doesn't exist
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+      - Products
+      summary: Retrieve a product by its id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/admin/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    put:
+      tags:
+      - Products
+      summary: Update an existing product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateProduct'
+      responses:
+        200:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+    delete:
+      tags:
+      - Products
+      summary: Delete an existing product
+      responses:
+        204:
+          description: Deleted
+          content:
+            application/json:
+              example: {}
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+  /api/admin/users:
+    post:
+      tags:
+      - Users
+      summary: Create a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateUser'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+      security:
+      - auth: []
+    get:
+      tags:
+      - Users
+      summary: Retrieve all users
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        204:
+          description: No users available
+          content:
+            application/json:
+              example: []
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found Error - this page doesn't exist
+          content:
+            application/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+  /api/users/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+      - Users
+      summary: Retrieve an user by its id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/admin/users/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    put:
+      tags:
+      - Users
+      summary: Update an existing user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateUser'
+      responses:
+        200:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+    delete:
+      tags:
+      - Users
+      summary: Delete an existing user
+      responses:
+        204:
+          description: Deleted
+          content:
+            application/json:
+              example: {}
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              example: 'Unauthorized'
+        404:
+          description: Not Found
+          content:
+            applcation/json:
+              example: 'Not Found'
+      security:
+      - auth: []
+  /api/orders:
+    post:
+      tags:
+      - Orders
+      summary: Make a new order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrder'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /api/orders/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+      - Orders
+      summary: Retrieve an order by its id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              example: 'Not Found'
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        _id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    CreateCategory:
+      type: object
+      properties:
+        nome:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
+    UpdateCategory:
+      type: object
+      properties:
+        nome:
+          type: string
+        status:
+          type: string
+    Product:
+      type: object
+      properties:
+        _id:
+          type: number
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        estoque:
+          type: number
+        categoria:
+          type: string
+    CreateOrUpdateProduct:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        estoque:
+          type: number
+        categoria:
+          type: string
+    Products:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
+    User:
+      type: object
+      properties:
+        _id:
+          type: number
+        usuario:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        dataCriacao:
+          type: string
+          format: date
+        cpf:
+          type: string
+        telefone:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+    CreateOrUpdateUser:
+      type: object
+      properties:
+        usuario:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    Order:
+      type: object
+      properties:
+        _id:
+          type: integer
+        dataPedido:
+          type: string
+          format: date
+        account:
+          type: object
+          properties:
+            accountId:
+              type: integer
+            usuario:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              enum:
+              - AC
+              - AL
+              - AP
+              - AM
+              - BA
+              - CE
+              - DF
+              - ES
+              - GO
+              - MA
+              - MT
+              - MS
+              - MG
+              - PA
+              - PB
+              - PR
+              - PE
+              - PI
+              - RJ
+              - RN
+              - RS
+              - RO
+              - RR
+              - SC
+              - SP
+              - SE
+              - TO
+        itens:
+          type: array
+          items:
+            properties:
+              productId:
+                type: integer
+              quantity:
+                type: number
+              discount:
+                type: number
+              precoUnitario:
+                type: number
+    CreateOrder:
+      type: object
+      properties:
+        account:
+          type: object
+          properties:
+            accountId:
+              type: integer
+            usuario:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              enum:
+              - AC
+              - AL
+              - AP
+              - AM
+              - BA
+              - CE
+              - DF
+              - ES
+              - GO
+              - MA
+              - MT
+              - MS
+              - MG
+              - PA
+              - PB
+              - PR
+              - PE
+              - PI
+              - RJ
+              - RN
+              - RS
+              - RO
+              - RR
+              - SC
+              - SP
+              - SE
+              - TO
+        itens:
+          type: array
+          items:
+            properties:
+              productId:
+                type: integer
+              quantity:
+                type: number
+              discount:
+                type: number
+              precoUnitario:
+                type: number
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
