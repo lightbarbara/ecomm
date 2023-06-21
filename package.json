@@ -6,7 +6,6 @@
     "type": "module",
     "scripts": {
         "start": "node src/main.js",
-        "test": "echo \"Error: no test specified\" && exit 1",
         "api": "npx json-server --watch src/cli/db.json",
         "listarCategorias": "node src/cli/cli.js --listarCategorias",
         "recuperarCategoriaPorId": "node src/cli/cli.js --recuperarCategoriaPorId",
@@ -14,17 +13,22 @@
         "atualizarCategoria": "node src/cli/cli.js --atualizarCategoria",
         "excluirCategoria": "node src/cli/cli.js --excluirCategoria",
         "lint": "eslint .",
-        "lint:fix": "eslint --fix ."
+        "lint:fix": "eslint --fix .",
+        "dev": "nodemon src/server.js"
     },
     "author": "",
     "license": "MIT",
     "dependencies": {
         "chalk": "^5.2.0",
-        "fs": "^0.0.1-security"
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "fs": "^0.0.1-security",
+        "mongoose": "^7.3.0"
     },
     "devDependencies": {
         "eslint": "^8.43.0",
         "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-plugin-import": "^2.27.5"
+        "eslint-plugin-import": "^2.27.5",
+        "nodemon": "^2.0.22"
     }
 }

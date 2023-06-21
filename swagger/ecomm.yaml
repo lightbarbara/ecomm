@@ -29,16 +29,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Categories'
-        204:
-          description: No categories available
-          content:
-            application/json:
-              example: []
-        404:
-          description: Not Found Error - this page doesn't exist
-          content:
-            application/json:
-              example: 'Not Found'
   /api/categories/{id}:
     parameters:
     - name: id
@@ -230,16 +220,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Products'
-        204:
-          description: No products available
-          content:
-            application/json:
-              example: []
-        404:
-          description: Not Found Error - this page doesn't exist
-          content:
-            application/json:
-              example: 'Not Found'
   /api/products/{id}:
     parameters:
     - name: id
@@ -355,21 +335,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Users'
-        204:
-          description: No users available
-          content:
-            application/json:
-              example: []
         401:
           description: Unauthorized
           content:
             application/json:
               example: 'Unauthorized'
-        404:
-          description: Not Found Error - this page doesn't exist
-          content:
-            application/json:
-              example: 'Not Found'
       security:
       - auth: []
   /api/users/{id}:
