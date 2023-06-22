@@ -9,18 +9,33 @@ class CategoryRepositories {
     return categoryOnDB;
   };
 
-  static getCategoryById = (id) => {
-    const category = categories.findById(id);
+  static getCategoryById = async (id) => {
+    const category = await categories.findById(id);
+    if (!category) {
+      const err = new Error('Invalid Id');
+      err.name = 'CastError';
+      throw err;
+    }
     return category;
   };
 
-  static updateCategory = (id, updatedCategory) => {
-    const category = categories.findByIdAndUpdate(id, { $set: updatedCategory }, { runValidators: true, new: true });
+  static updateCategory = async (id, updatedCategory) => {
+    const category = await categories.findByIdAndUpdate(id, { $set: updatedCategory }, { runValidators: true, new: true });
+    if (!category) {
+      const err = new Error('Invalid Id');
+      err.name = 'CastError';
+      throw err;
+    }
     return category;
   };
 
-  static deleteCategory = (id) => {
-    const category = categories.findByIdAndDelete(id);
+  static deleteCategory = async (id) => {
+    const category = await categories.findByIdAndDelete(id);
+    if (!category) {
+      const err = new Error('Invalid Id');
+      err.name = 'CastError';
+      throw err;
+    }
     return category;
   };
 }

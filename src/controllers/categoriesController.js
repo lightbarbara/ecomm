@@ -44,7 +44,7 @@ class CategoryController {
       const category = await CategoryRepositories.updateCategory(id, req.body);
       return res.status(200).json(category);
     } catch (err) {
-      console.log(err.name);
+      console.log(err);
       if (err.name === 'CastError') {
         return res.status(404).send({ message: err.message });
       }
@@ -58,13 +58,13 @@ class CategoryController {
   static deleteCategory = async (req, res) => {
     try {
       const { id } = req.params;
-      const category = await CategoryRepositories.deleteCategory(id);
-      if (!category) {
-        return res.status(404).send({ message: 'Invalid Id' });
-      }
+      await CategoryRepositories.deleteCategory(id);
       return res.sendStatus(204);
     } catch (err) {
-      console.log(err.name);
+      console.log(err);
+      if (err.name === 'CastError') {
+        return res.status(404).send({ message: err.message });
+      }
       return res.status(500).send({ message: err.message });
     }
   };
