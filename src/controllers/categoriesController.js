@@ -68,6 +68,20 @@ class CategoryController {
       return res.status(500).send({ message: err.message });
     }
   };
+
+  static activateCategory = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const category = await CategoryRepositories.activateCategory(id);
+      return res.status(200).send(category);
+    } catch (err) {
+      console.log(err);
+      if (err.name === 'CastError') {
+        return res.status(404).send({ message: err.message });
+      }
+      return res.status(500).send({ message: err.message });
+    }
+  };
 }
 
 export default CategoryController;

@@ -38,6 +38,17 @@ class CategoryRepositories {
     }
     return category;
   };
+
+  static activateCategory = async (id) => {
+    const outdatedCategory = await this.getCategoryById(id);
+    if (!outdatedCategory) {
+      const err = new Error('Invalid Id');
+      err.name = 'CastError';
+      throw err;
+    }
+    const category = await categories.findByIdAndUpdate(id, { $set: { nome: outdatedCategory.nome, status: 'ATIVA' }}, {runValidators: true, new: true} );
+    return category;
+  };
 }
 
 export default CategoryRepositories;
