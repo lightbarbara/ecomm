@@ -1,4 +1,3 @@
-import categories from '../models/Category.js';
 import CategoryRepositories from '../repositories/categoriesRepositories.js';
 
 class CategoryController {
@@ -18,6 +17,9 @@ class CategoryController {
       return res.status(201).send(category);
     } catch (err) {
       console.log(err);
+      if (err.name === 'StrictModeError' || err.name === 'ValidationError') {
+        return res.status(422).send({ message: err.message });
+      }
       return res.status(500).send({ message: err.message });
     }
   };
@@ -30,7 +32,24 @@ class CategoryController {
     } catch (err) {
       console.log(err);
       if (err.name === 'CastError') {
-        return res.status(404).send({message: err.message});
+        return res.status(404).send({ message: err.message });
+      }
+      return res.status(500).send({ message: err.message });
+    }
+  };
+
+  static updateCategory = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const category = await CategoryRepositories.updateCategory(id, req.body);
+      return res.status(200).json(category);
+    } catch (err) {
+      console.log(err.name);
+      if (err.name === 'CastError') {
+        return res.status(404).send({ message: err.message });
+      }
+      if (err.name === 'StrictModeError' || err.name === 'ValidationError') {
+        return res.status(422).send({ message: err.message });
       }
       return res.status(500).send({ message: err.message });
     }

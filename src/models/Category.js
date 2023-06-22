@@ -11,6 +11,8 @@ const categorySchema = new mongoose.Schema({
     type: String, required: true, minlength: 3, validate: validateName,
   },
   status: { type: String, required: true },
+}, {
+  strict: 'throw',
 });
 
 const categories = mongoose.model('categories', categorySchema);
