@@ -18,6 +18,11 @@ class CategoryRepositories {
     const category = categories.findByIdAndUpdate(id, { $set: updatedCategory }, { runValidators: true, new: true });
     return category;
   };
+
+  static deleteCategory = (id) => {
+    const category = categories.findByIdAndDelete(id);
+    return category;
+  };
 }
 
 export default CategoryRepositories;
