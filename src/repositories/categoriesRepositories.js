@@ -46,7 +46,7 @@ class CategoryRepositories {
       err.name = 'CastError';
       throw err;
     }
-    const category = await categories.findByIdAndUpdate(id, { $set: { nome: outdatedCategory.nome, status: 'ATIVA' }}, {runValidators: true, new: true} );
+    const category = await categories.findByIdAndUpdate(id, { $set: { nome: outdatedCategory.nome, status: 'ATIVA' } }, { runValidators: true, new: true });
     return category;
   };
 }
