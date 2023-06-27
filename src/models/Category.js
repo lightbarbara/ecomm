@@ -10,7 +10,9 @@ const categorySchema = new mongoose.Schema({
   nome: {
     type: String, required: true, minlength: 3, validate: validateName,
   },
-  status: { type: String, required: true },
+  status: {
+    type: String, required: true, enum: ['ATIVA', 'INATIVA'], default: 'ATIVA',
+  },
 }, {
   strict: 'throw',
 });

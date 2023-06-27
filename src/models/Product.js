@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema({
   },
   categoria: { type: mongoose.Schema.Types.ObjectId, ref: 'categories', required: true },
 }, {
-  strict: 'throw'
+  strict: 'throw',
 });
 
 const products = mongoose.model('products', productSchema);
