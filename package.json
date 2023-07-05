@@ -2,10 +2,10 @@
     "name": "ecomm",
     "version": "1.0.0",
     "description": "",
-    "main": "src/main.js",
+    "main": "src/server.js",
     "type": "module",
     "scripts": {
-        "start": "node src/main.js",
+        "start": "node src/server.js",
         "api": "npx json-server --watch src/cli/db.json",
         "listarCategorias": "node src/cli/cli.js --listarCategorias",
         "recuperarCategoriaPorId": "node src/cli/cli.js --recuperarCategoriaPorId",

@@ -11,6 +11,9 @@ services:
       - 3000:3000
     depends_on:
       - mongo-ecomm
+    environment:
+      MONGO_HOST: mongo-ecomm
+      PORT: 3000
 
   mongo-ecomm:
     image: mongo
