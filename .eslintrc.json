@@ -13,6 +13,8 @@
         "no-console": "off",
         "no-undef": "off",
         "max-len": "off",
-        "default-case": "off"
+        "default-case": "off",
+        "new-cap": "off",
+        "no-underscore-dangle": "off"
     }
 }
